@@ -1,9 +1,7 @@
 import os
 import aiohttp
-from aiogram import types, Bot, Router  # noqa: F401
+from aiogram import types, Router
 from aiogram.filters import Command
-#from aiogram.fsm.context import FSMContext
-#from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 router = Router(name="geoExtension")
 
@@ -20,4 +18,4 @@ async def meteo_handler(event: types.Message) -> None:
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as response:
             data = await response.json()
-            print(data)
+            await event.answer(f"{data}")
