@@ -15,4 +15,5 @@ bot_config = {
 
 modules_config = {
     "geo": True,
+    "translate": True,
 }
