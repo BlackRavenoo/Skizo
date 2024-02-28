@@ -1,6 +1,6 @@
 import os
 import aiohttp
-from aiogram import types, Router, Bot
+from aiogram import types, Router
 from aiogram.filters import Command, CommandObject
 from dotenv import load_dotenv
 from modules.translateExtension import googletranslate
@@ -27,7 +27,7 @@ currencyKey = os.getenv('CURRENCY_API')
 async def meteo_handler(event: types.Message,
                         command: CommandObject) -> None:
     try:
-        ar = command.args.split()
+        ar = command.args.split(" ")
         day = int(ar[0])
     except (AttributeError, ValueError):
         day = 0
@@ -52,7 +52,7 @@ async def meteo_handler(event: types.Message,
 async def currency_handler(event: types.Message,
                            command: CommandObject) -> None:
     try:
-        ar = command.args.split()
+        ar = command.args.split(" ")
         cur0 = ar[0]
         cur1 = ar[1]
     except Exception:

@@ -8,6 +8,8 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from dotenv import load_dotenv
 
 from config import bot_config
+from middlewares.is_owner import IsOwnerMiddleware
+from middlewares.action import ActionMiddleware
 
 load_dotenv()
 API_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
@@ -18,6 +20,9 @@ bot = Bot(token=API_TOKEN)
 disp = Dispatcher(storage=MemoryStorage())
 scheduler = AsyncIOScheduler()
 
+disp.message.middleware(IsOwnerMiddleware())
+disp.callback_query.middleware(IsOwnerMiddleware())
+disp.message.middleware(ActionMiddleware())
 
 async def main():
     scheduler.start()
